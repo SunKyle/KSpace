@@ -1,0 +1,112 @@
+---
+title: "使用 Next.js 15 构建现代个人网站"
+date: "2026-06-20"
+tags: ["nextjs", "react", "frontend", "tutorial"]
+description: "记录如何使用 Next.js 15 App Router 从零构建个人技术品牌站，涵盖架构设计、MDX 博客系统和性能优化。"
+---
+
+## 为什么选择 Next.js
+
+Next.js 15 是目前构建内容驱动型个人网站的最佳选择之一。它提供了：
+
+- **Server Components** — 默认服务端渲染，零客户端 JS 开销
+- **App Router** — 文件系统路由，嵌套布局，Streaming
+- **ISR** — 增量静态再生成，内容更新无需重新构建全站
+- **MDX 支持** — 在 Markdown 中直接使用 React 组件
+
+## 项目架构
+
+```
+src/
+├── app/          # App Router 页面
+├── components/   # UI 组件
+├── content/      # MDX 内容
+├── lib/          # 工具函数
+└── styles/       # 全局样式
+```
+
+## 内容管理方案
+
+使用 **Velite** 处理 MDX 内容。它的优势在于：
+
+1. **类型安全** — 基于 Zod schema 自动生成 TypeScript 类型
+2. **构建时处理** — 不依赖客户端运行时
+3. **灵活的 schema** — 支持自定义转换逻辑
+
+```typescript
+// velite.config.ts
+const posts = defineCollection({
+  name: "Post",
+  pattern: "blog/**/*.mdx",
+  schema: s.object({
+    title: s.string(),
+    date: s.isodate(),
+    tags: s.array(s.string()),
+    code: s.mdx(),
+  }),
+});
+```
+
+## 样式系统
+
+使用 Tailwind CSS 搭配 CSS 变量实现亮/暗主题切换：
+
+```css
+:root {
+  --color-bg-primary: 255 255 255;
+  --color-text-primary: 17 24 39;
+}
+
+.dark {
+  --color-bg-primary: 10 10 15;
+  --color-text-primary: 243 244 246;
+}
+```
+
+## 性能优化
+
+### 1. 图片优化
+
+使用 Next.js `next/image` 组件自动优化图片：
+
+```tsx
+import Image from "next/image";
+
+<Image
+  src="/blog/cover.jpg"
+  width={1200}
+  height={630}
+  alt="Cover"
+  priority
+/>
+```
+
+### 2. 字体优化
+
+使用 `next/font` 自托管字体，避免外部请求：
+
+```tsx
+import { Inter } from "next/font/google";
+
+const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+```
+
+### 3. 代码分割
+
+利用 Server Components 天然支持代码分割，客户端交互组件用 `"use client"` 按需加载。
+
+## 部署
+
+Vercel 是最佳选择：
+
+- 零配置部署 Next.js
+- 自动 HTTPS 和 CDN
+- 预览部署环境
+- 免费额度个人站完全够用
+
+## 总结
+
+Next.js 15 为个人技术站提供了完整的解决方案。从内容管理到部署，整个流程流畅且高效。下一篇将深入介绍 MDX 自定义组件和代码高亮的配置细节。

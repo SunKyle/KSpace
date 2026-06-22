@@ -1,0 +1,100 @@
+---
+title: "TypeScript 高级类型体操入门"
+date: "2026-06-15"
+tags: ["typescript", "frontend", "programming"]
+description: "掌握 TypeScript 条件类型、模板字面量类型、infer 关键字等高级特性，提升类型抽象能力。"
+---
+
+## 基础回顾
+
+TypeScript 的类型系统是图灵完备的。这意味着你可以用它来**表达运行时逻辑**——这就是所谓的"类型体操"。
+
+## 条件类型 (Conditional Types)
+
+```typescript
+type IsString<T> = T extends string ? true : false;
+
+type A = IsString<"hello">; // true
+type B = IsString<42>;       // false
+```
+
+### 分布式条件类型
+
+当 `T` 是联合类型时，条件类型会自动分布：
+
+```typescript
+type ToArray<T> = T extends any ? T[] : never;
+
+type Result = ToArray<string | number>;
+// = (string extends any ? string[] : never)
+// | (number extends any ? number[] : never)
+// = string[] | number[]
+```
+
+## `infer` 关键字
+
+`infer` 用于在条件类型中**提取**类型：
+
+```typescript
+type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
+
+type Result = UnwrapPromise<Promise<string>>; // string
+type Result2 = UnwrapPromise<number>;          // number
+```
+
+### 进阶：提取函数参数
+
+```typescript
+type FirstParam<T> = T extends (first: infer F, ...args: any[]) => any
+  ? F
+  : never;
+
+type P = FirstParam<(x: number, y: string) => void>;
+// number
+```
+
+## 模板字面量类型 (Template Literal Types)
+
+```typescript
+type EventName<T extends string> = `on${Capitalize<T>}`;
+
+type Click = EventName<"click">; // "onClick"
+type Change = EventName<"change">; // "onChange"
+```
+
+### 字符串解析
+
+```typescript
+type ParseRoute<T extends string> =
+  T extends `${infer Prefix}/${infer Rest}`
+    ? { prefix: Prefix; rest: Rest }
+    : { prefix: T; rest: never };
+
+type Route = ParseRoute<"api/v1/users">;
+// { prefix: "api"; rest: "v1/users" }
+```
+
+## 映射类型实战
+
+### Deep Readonly
+
+```typescript
+type DeepReadonly<T> = {
+  readonly [K in keyof T]: T[K] extends object
+    ? DeepReadonly<T[K]>
+    : T[K];
+};
+
+interface Config {
+  database: {
+    host: string;
+    port: number;
+  };
+}
+
+type ReadonlyConfig = DeepReadonly<Config>;
+```
+
+## 总结
+
+TypeScript 的高级类型是一把双刃剑——用好了可以极大提升代码安全性，但过度使用会降低可读性。建议遵循一条原则：**类型的复杂度不应超过它要解决的问题**。
