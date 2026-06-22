@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { posts } from "@/lib/velite";
 import { TOC } from "@/components/blog/TOC";
 import { Comments } from "@/components/blog/Comments";
+import { CodeHighlight } from "@/components/blog/CodeHighlight";
 import { formatDate, readingTime } from "@/lib/utils";
 import { Calendar, Clock, Tag, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -103,6 +104,7 @@ export default async function BlogPostPage({
             className="prose-custom [&_.heading-link]:no-underline"
             dangerouslySetInnerHTML={{ __html: post.code }}
           />
+          <CodeHighlight />
         </article>
 
         {/* Sidebar - TOC */}

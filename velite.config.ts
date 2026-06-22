@@ -1,7 +1,6 @@
 import { defineConfig, defineCollection, s } from "velite";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeShiki from "rehype-shiki";
 import remarkGfm from "remark-gfm";
 
 const slugify = (title: string) =>
@@ -54,12 +53,6 @@ export default defineConfig({
           properties: {
             className: ["heading-link"],
           },
-        },
-      ],
-      [
-        rehypeShiki,
-        {
-          theme: "github-dark",
         },
       ],
     ],
