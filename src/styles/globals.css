@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-primary: 255 255 255;
+    --color-bg-secondary: 249 250 251;
+    --color-bg-tertiary: 243 244 246;
+    --color-text-primary: 17 24 39;
+    --color-text-secondary: 75 85 99;
+    --color-text-tertiary: 156 163 175;
+    --color-border: 229 231 235;
+    --color-accent: 99 102 241;
+    --color-accent-hover: 79 70 229;
+    --color-card-bg: 255 255 255;
+    --color-card-border: 229 231 235;
+    --color-code-bg: 243 244 246;
+  }
+
+  .dark {
+    --color-bg-primary: 10 10 15;
+    --color-bg-secondary: 18 18 26;
+    --color-bg-tertiary: 30 30 42;
+    --color-text-primary: 243 244 246;
+    --color-text-secondary: 156 163 175;
+    --color-text-tertiary: 107 114 128;
+    --color-border: 38 38 50;
+    --color-accent: 129 140 248;
+    --color-accent-hover: 165 180 252;
+    --color-card-bg: 18 18 26;
+    --color-card-border: 38 38 50;
+    --color-code-bg: 30 30 42;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    @apply bg-brand-500/30;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-5xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-wide {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-2xl border border-[rgb(var(--color-card-border))] bg-[rgb(var(--color-card-bg))] p-6;
+    @apply transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card;
+    @apply hover:border-[rgb(var(--color-accent))]/30 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-3 text-lg text-[rgb(var(--color-text-secondary))];
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-xl bg-brand-600 px-6 py-3 text-sm font-semibold text-white;
+    @apply transition-all duration-200 hover:bg-brand-700 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-xl border border-[rgb(var(--color-border))] px-6 py-3 text-sm font-medium;
+    @apply transition-all duration-200 hover:border-[rgb(var(--color-accent))] hover:text-[rgb(var(--color-accent))] active:scale-95;
+  }
+}
