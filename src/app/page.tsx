@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Code2, FileText, FlaskConical, Layers } from "lucide-react";
+import { HeroSection } from "@/components/home/HeroSection";
 
 const QUICK_LINKS = [
   {
@@ -51,33 +52,11 @@ const SKILLS = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="container-page py-20 sm:py-32">
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            <span className="bg-gradient-to-r from-brand-600 to-violet-500 bg-clip-text text-transparent">
-              KSpace
-            </span>
-          </h1>
-          <p className="mt-6 text-xl leading-relaxed text-[rgb(var(--color-text-secondary))]">
-            一个全栈开发者的个人技术空间。
-            <br />
-            思考、构建、分享——探索技术的边界。
-          </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <Link href="/blog" className="btn-primary">
-              阅读博客
-              <ArrowRight size={16} />
-            </Link>
-            <Link href="/projects" className="btn-ghost">
-              查看项目
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero with Gooey Pixel Trail */}
+      <HeroSection />
 
       {/* Quick Entry Cards */}
-      <section className="container-wide pb-24">
+      <section className="container-wide pb-24 pt-20">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {QUICK_LINKS.map((link) => (
             <Link key={link.href} href={link.href} className="card-hover group">
