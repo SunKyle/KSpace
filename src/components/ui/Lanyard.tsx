@@ -348,14 +348,22 @@ function Band({
           >
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <mesh geometry={(nodes as any).card.geometry}>
-              <meshPhysicalMaterial
-                map={cardMap}
-                map-anisotropy={16}
-                clearcoat={isMobile ? 0 : 1}
-                clearcoatRoughness={0.15}
-                roughness={0.9}
-                metalness={0.8}
-              />
+              {cardMap ? (
+                <meshPhysicalMaterial
+                  map={cardMap}
+                  map-anisotropy={16}
+                  clearcoat={isMobile ? 0 : 1}
+                  clearcoatRoughness={0.15}
+                  roughness={0.9}
+                  metalness={0.8}
+                />
+              ) : (
+                <meshStandardMaterial
+                  color="white"
+                  roughness={0.9}
+                  metalness={0.8}
+                />
+              )}
             </mesh>
             <mesh
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
