@@ -10,51 +10,52 @@ export function PostCard({ post }: { post: Post }) {
 
   return (
     <article className="card-hover group flex flex-col">
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-3">
-        {post.tags.slice(0, 3).map((tag: string) => (
-          <Link
-            key={tag}
-            href={`/blog?tag=${encodeURIComponent(tag)}`}
-            className="text-xs font-medium px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-600 dark:text-brand-400 transition-colors hover:bg-brand-500/20"
-          >
-            {tag}
-          </Link>
-        ))}
+      {/* Meta row: date + reading time */}
+      <div className="flex items-center gap-3 text-xs text-[rgb(var(--color-text-tertiary))] font-mono mb-3">
+        <span className="inline-flex items-center gap-1">
+          <Calendar size={12} />
+          {formatDate(post.date.toString())}
+        </span>
+        <span className="text-[rgb(var(--color-border))]">·</span>
+        <span className="inline-flex items-center gap-1">
+          <Clock size={12} />
+          {readTime} min
+        </span>
       </div>
 
       {/* Title */}
       <Link href={post.path}>
-        <h2 className="text-lg font-bold leading-snug transition-colors group-hover:text-[rgb(var(--color-accent))]">
+        <h2 className="text-lg font-bold leading-snug tracking-tight transition-colors group-hover:text-[rgb(var(--color-accent))]">
           {post.title}
         </h2>
       </Link>
 
       {/* Description */}
-      <p className="mt-2 text-sm text-[rgb(var(--color-text-secondary))] line-clamp-2 flex-1">
+      <p className="mt-2 text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed line-clamp-2 flex-1">
         {post.description}
       </p>
 
-      {/* Meta */}
-      <div className="mt-4 flex items-center gap-4 text-xs text-[rgb(var(--color-text-tertiary))]">
-        <span className="inline-flex items-center gap-1">
-          <Calendar size={13} />
-          {formatDate(post.date.toString())}
-        </span>
-        <span className="inline-flex items-center gap-1">
-          <Clock size={13} />
-          {readTime} 分钟阅读
-        </span>
+      {/* Tags + Read more */}
+      <div className="mt-4 flex items-center justify-between">
+        <div className="flex flex-wrap gap-1.5">
+          {post.tags.slice(0, 3).map((tag: string) => (
+            <Link
+              key={tag}
+              href={`/blog?tag=${encodeURIComponent(tag)}`}
+              className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[rgb(var(--color-bg-tertiary))] text-[rgb(var(--color-text-tertiary))] transition-colors hover:bg-[rgb(var(--color-accent))]/10 hover:text-[rgb(var(--color-accent))]"
+            >
+              {tag}
+            </Link>
+          ))}
+        </div>
+        <Link
+          href={post.path}
+          className="inline-flex items-center gap-1 text-sm font-medium text-[rgb(var(--color-accent))] opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5"
+        >
+          阅读
+          <ArrowRight size={14} />
+        </Link>
       </div>
-
-      {/* Read more */}
-      <Link
-        href={post.path}
-        className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[rgb(var(--color-accent))] opacity-0 transition-opacity group-hover:opacity-100"
-      >
-        阅读全文
-        <ArrowRight size={14} />
-      </Link>
     </article>
   );
 }

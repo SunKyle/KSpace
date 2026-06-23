@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MapPin, Briefcase, GraduationCap, Github, Twitter, Mail } from "lucide-react";
+import { MapPin, Briefcase, GraduationCap, Github, Twitter, Mail, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "关于我",
@@ -41,79 +41,94 @@ export default function AboutPage() {
   return (
     <div className="container-page py-16 sm:py-24">
       {/* Header */}
-      <div className="mx-auto max-w-2xl text-center">
-        <h1 className="section-title">关于我</h1>
-        <p className="section-subtitle">
-          一个热爱技术、持续探索的全栈开发者
+      <div className="mx-auto max-w-2xl">
+        <span className="section-label">about</span>
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          你好，我是 Kyle
+        </h1>
+        <p className="mt-3 text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          全栈开发者，专注于 Web 全栈与 AI/LLM 应用。
         </p>
       </div>
 
-      {/* Bio */}
-      <div className="mx-auto mt-12 max-w-2xl space-y-4 text-[rgb(var(--color-text-secondary))] leading-relaxed">
-        <p>
-          你好，我是 Kyle，一名全栈开发者，专注于 Web 全栈开发和 AI/LLM 应用。
-          我相信技术的力量在于它能将创意变为现实，这也是我持续学习和构建的动力。
-        </p>
-        <p>
-          目前我专注于深耕前后端全栈技术栈，同时在 AI 应用开发和开源项目上投入时间。
-          这个网站是我技术旅程的记录——分享思考、展示项目、探索实验。
-        </p>
-        <p>
-          工作之余，我喜欢研究新的技术趋势、写技术博客、参与开源社区，
-          以及探索 AI 在各类场景中的应用可能性。
-        </p>
-      </div>
-
-      {/* Info Links */}
-      <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-[rgb(var(--color-text-secondary))]">
-        <span className="inline-flex items-center gap-1">
-          <MapPin size={16} /> 北京 / 中国
+      {/* Contact row */}
+      <div className="mx-auto mt-8 flex flex-wrap items-center gap-4 text-sm text-[rgb(var(--color-text-secondary))]">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgb(var(--color-bg-tertiary))]">
+          <MapPin size={14} />
+          北京
         </span>
         <a
           href="https://github.com/kyle-sun"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 transition-colors hover:text-[rgb(var(--color-accent))]"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgb(var(--color-bg-tertiary))] transition-colors hover:bg-[rgb(var(--color-accent))]/10 hover:text-[rgb(var(--color-accent))]"
         >
-          <Github size={16} /> GitHub
+          <Github size={14} />
+          GitHub
+          <ArrowUpRight size={11} />
         </a>
         <a
           href="https://twitter.com/kyle_sun"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 transition-colors hover:text-[rgb(var(--color-accent))]"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgb(var(--color-bg-tertiary))] transition-colors hover:bg-[rgb(var(--color-accent))]/10 hover:text-[rgb(var(--color-accent))]"
         >
-          <Twitter size={16} /> Twitter
+          <Twitter size={14} />
+          Twitter
+          <ArrowUpRight size={11} />
         </a>
         <a
           href="mailto:kyle@kspace.dev"
-          className="inline-flex items-center gap-1 transition-colors hover:text-[rgb(var(--color-accent))]"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgb(var(--color-bg-tertiary))] transition-colors hover:bg-[rgb(var(--color-accent))]/10 hover:text-[rgb(var(--color-accent))]"
         >
-          <Mail size={16} /> Email
+          <Mail size={14} />
+          Email
         </a>
+      </div>
+
+      {/* Bio — with pull quote */}
+      <div className="mx-auto mt-14 max-w-2xl">
+        <div className="space-y-4 text-[rgb(var(--color-text-secondary))] leading-relaxed text-[15px]">
+          <p>
+            我相信技术的力量在于它能将创意变为现实——这也是我持续学习和构建的动力。
+            目前专注于深耕前后端全栈技术栈，同时在 AI 应用开发和开源项目上投入时间。
+          </p>
+          <div className="border-l-2 border-[rgb(var(--color-accent))] pl-4 py-1 my-6">
+            <p className="text-[rgb(var(--color-text-primary))] text-base font-medium">
+              这个网站是我技术旅程的记录——分享思考、展示项目、探索实验。
+            </p>
+          </div>
+          <p>
+            工作之余，我喜欢研究新的技术趋势、写技术博客、参与开源社区，
+            以及探索 AI 在各类场景中的应用可能性。如果你对技术有同样的热情，欢迎交流。
+          </p>
+        </div>
       </div>
 
       {/* Experience */}
       <section className="mx-auto mt-20 max-w-2xl">
-        <h2 className="flex items-center gap-2 text-2xl font-bold">
-          <Briefcase size={22} className="text-[rgb(var(--color-accent))]" />
+        <span className="section-label">career</span>
+        <h2 className="flex items-center gap-2 text-xl font-bold">
+          <Briefcase size={18} className="text-[rgb(var(--color-accent))]" />
           工作经历
         </h2>
-        <div className="mt-8 space-y-8">
+        <div className="mt-8 space-y-0">
           {EXPERIENCE.map((exp) => (
             <div
               key={exp.period}
-              className="relative border-l-2 border-[rgb(var(--color-border))] pl-6"
+              className="relative pl-8 pb-8 border-l-2 border-[rgb(var(--color-border))] last:border-transparent last:pb-0"
             >
-              <div className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-[rgb(var(--color-accent))]" />
-              <span className="text-sm font-medium text-[rgb(var(--color-accent))]">
+              <div className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[rgb(var(--color-accent))] ring-4 ring-[rgb(var(--color-bg-primary))]" />
+              <span className="text-xs font-medium text-[rgb(var(--color-accent))] font-mono tracking-wide">
                 {exp.period}
               </span>
-              <h3 className="mt-1 font-semibold">{exp.role}</h3>
-              <p className="text-sm text-[rgb(var(--color-text-secondary))]">
+              <h3 className="mt-1 font-semibold text-[rgb(var(--color-text-primary))]">
+                {exp.role}
+              </h3>
+              <p className="text-sm text-[rgb(var(--color-text-tertiary))]">
                 {exp.company}
               </p>
-              <p className="mt-2 text-sm text-[rgb(var(--color-text-secondary))]">
+              <p className="mt-2 text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
                 {exp.description}
               </p>
             </div>
@@ -123,18 +138,18 @@ export default function AboutPage() {
 
       {/* Education */}
       <section className="mx-auto mt-16 max-w-2xl">
-        <h2 className="flex items-center gap-2 text-2xl font-bold">
-          <GraduationCap size={22} className="text-[rgb(var(--color-accent))]" />
+        <h2 className="flex items-center gap-2 text-xl font-bold">
+          <GraduationCap size={18} className="text-[rgb(var(--color-accent))]" />
           教育
         </h2>
-        <div className="mt-8 space-y-6">
+        <div className="mt-6">
           {EDUCATION.map((edu) => (
             <div key={edu.period} className="card">
-              <span className="text-sm font-medium text-[rgb(var(--color-accent))]">
+              <span className="text-xs font-medium text-[rgb(var(--color-accent))] font-mono tracking-wide">
                 {edu.period}
               </span>
               <h3 className="mt-1 font-semibold">{edu.degree}</h3>
-              <p className="text-sm text-[rgb(var(--color-text-secondary))]">
+              <p className="text-sm text-[rgb(var(--color-text-tertiary))]">
                 {edu.school}
               </p>
             </div>
@@ -144,18 +159,19 @@ export default function AboutPage() {
 
       {/* Skills */}
       <section className="mx-auto mt-16 max-w-2xl">
-        <h2 className="text-2xl font-bold">技能</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+        <span className="section-label">stack</span>
+        <h2 className="text-xl font-bold">技术栈</h2>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {Object.entries(SKILLS_GROUPED).map(([category, skills]) => (
             <div key={category} className="card">
-              <h3 className="text-sm font-semibold text-[rgb(var(--color-accent))]">
+              <h3 className="text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wider">
                 {category}
               </h3>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="mt-3 flex flex-wrap gap-1.5">
                 {skills.map((skill) => (
                   <span
                     key={skill}
-                    className="inline-flex items-center rounded-md bg-[rgb(var(--color-bg-tertiary))] px-3 py-1 text-xs font-medium text-[rgb(var(--color-text-secondary))]"
+                    className="inline-flex items-center rounded-md bg-[rgb(var(--color-bg-tertiary))] px-2.5 py-1 text-xs font-medium text-[rgb(var(--color-text-secondary))] transition-colors hover:text-[rgb(var(--color-accent))]"
                   >
                     {skill}
                   </span>

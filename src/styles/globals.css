@@ -6,83 +6,188 @@
 
 @layer base {
   :root {
-    --color-bg-primary: 255 255 255;
-    --color-bg-secondary: 249 250 251;
-    --color-bg-tertiary: 243 244 246;
-    --color-text-primary: 17 24 39;
-    --color-text-secondary: 75 85 99;
-    --color-text-tertiary: 156 163 175;
-    --color-border: 229 231 235;
-    --color-accent: 99 102 241;
-    --color-accent-hover: 79 70 229;
+    --color-bg-primary: 250 250 250;
+    --color-bg-secondary: 245 245 245;
+    --color-bg-tertiary: 232 232 238;
+    --color-text-primary: 15 23 42;
+    --color-text-secondary: 71 85 105;
+    --color-text-tertiary: 148 163 184;
+    --color-border: 226 232 240;
+    --color-accent: 79 70 229;
+    --color-accent-hover: 67 56 202;
+    --color-accent-glow: 99 102 241;
     --color-card-bg: 255 255 255;
-    --color-card-border: 229 231 235;
-    --color-code-bg: 243 244 246;
+    --color-card-border: 226 232 240;
+    --color-code-bg: 241 245 249;
+    --color-success: 16 185 129;
+    --color-warning: 245 158 11;
+    --color-error: 239 68 68;
   }
 
   .dark {
-    --color-bg-primary: 10 10 15;
-    --color-bg-secondary: 18 18 26;
-    --color-bg-tertiary: 30 30 42;
-    --color-text-primary: 243 244 246;
-    --color-text-secondary: 156 163 175;
-    --color-text-tertiary: 107 114 128;
-    --color-border: 38 38 50;
+    --color-bg-primary: 9 9 11;
+    --color-bg-secondary: 15 15 20;
+    --color-bg-tertiary: 24 24 32;
+    --color-text-primary: 248 250 252;
+    --color-text-secondary: 161 161 180;
+    --color-text-tertiary: 99 99 120;
+    --color-border: 32 32 42;
     --color-accent: 129 140 248;
     --color-accent-hover: 165 180 252;
-    --color-card-bg: 18 18 26;
-    --color-card-border: 38 38 50;
-    --color-code-bg: 30 30 42;
+    --color-accent-glow: 99 102 241;
+    --color-card-bg: 15 15 20;
+    --color-card-border: 32 32 42;
+    --color-code-bg: 20 20 28;
+    --color-success: 52 211 153;
+    --color-warning: 251 191 36;
+    --color-error: 248 113 113;
   }
 
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] antialiased;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: rgb(var(--color-bg-primary));
+    color: rgb(var(--color-text-primary));
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   ::selection {
-    @apply bg-brand-500/30;
+    background-color: rgb(var(--color-accent) / 0.25);
+  }
+
+  /* Visible focus ring */
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Skip to content for accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
 @layer components {
+  /* ---- Layout ---- */
   .container-page {
-    @apply mx-auto max-w-5xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-4xl px-4 sm:px-6 lg:px-8;
   }
 
   .container-wide {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
   }
 
+  /* ---- Cards ---- */
   .card {
     @apply rounded-2xl border border-[rgb(var(--color-card-border))] bg-[rgb(var(--color-card-bg))] p-6;
     @apply transition-all duration-300;
   }
 
   .card-hover {
-    @apply card;
-    @apply hover:border-[rgb(var(--color-accent))]/30 hover:shadow-lg hover:-translate-y-0.5;
+    @apply card cursor-pointer;
+    @apply hover:border-[rgb(var(--color-accent))]/25 hover:shadow-md hover:shadow-[rgb(var(--color-accent))]/5 hover:-translate-y-0.5;
   }
 
+  /* ---- Typography ---- */
   .section-title {
-    @apply text-3xl font-bold tracking-tight sm:text-4xl;
+    @apply text-2xl font-bold tracking-tight sm:text-3xl;
   }
 
   .section-subtitle {
-    @apply mt-3 text-lg text-[rgb(var(--color-text-secondary))];
+    @apply mt-2 text-base text-[rgb(var(--color-text-secondary))];
   }
 
+  /* Code-inspired section label */
+  .section-label {
+    @apply inline-block font-mono text-xs tracking-widest uppercase text-[rgb(var(--color-text-tertiary))] mb-3;
+    letter-spacing: 0.12em;
+  }
+
+  .section-label::before {
+    content: "// ";
+  }
+
+  /* ---- Buttons ---- */
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-xl bg-brand-600 px-6 py-3 text-sm font-semibold text-white;
-    @apply transition-all duration-200 hover:bg-brand-700 active:scale-95;
+    @apply inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold;
+    @apply bg-[rgb(var(--color-accent))] text-white;
+    @apply transition-all duration-200 hover:bg-[rgb(var(--color-accent-hover))] hover:shadow-lg hover:shadow-[rgb(var(--color-accent))]/25 active:scale-[0.97];
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-xl border border-[rgb(var(--color-border))] px-6 py-3 text-sm font-medium;
-    @apply transition-all duration-200 hover:border-[rgb(var(--color-accent))] hover:text-[rgb(var(--color-accent))] active:scale-95;
+    @apply inline-flex items-center gap-2 rounded-xl border border-[rgb(var(--color-border))] px-5 py-2.5 text-sm font-medium;
+    @apply transition-all duration-200 hover:border-[rgb(var(--color-accent))]/40 hover:text-[rgb(var(--color-accent))] active:scale-[0.97];
+  }
+
+  /* ---- Decorations ---- */
+  .bracket-decorate::before {
+    content: "{ ";
+    color: rgb(var(--color-accent));
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  .bracket-decorate::after {
+    content: " }";
+    color: rgb(var(--color-accent));
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  /* ---- Scroll Reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- Hero transition ---- */
+  .hero-fade-bottom {
+    position: relative;
+  }
+
+  .hero-fade-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgb(var(--color-bg-primary)));
+    pointer-events: none;
+    z-index: 1;
   }
 }

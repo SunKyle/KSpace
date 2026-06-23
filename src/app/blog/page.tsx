@@ -44,7 +44,7 @@ export default async function BlogListPage({
   return (
     <div className="container-page py-12">
       {/* Search + Tags */}
-      <div className="mx-auto max-w-2xl space-y-6 mb-12">
+      <div className="mx-auto max-w-2xl space-y-5 mb-12">
         <SearchBar />
         <TagFilter tags={allTags} selectedTag={selectedTag} />
       </div>
@@ -52,12 +52,18 @@ export default async function BlogListPage({
       {/* List */}
       {filtered.length === 0 ? (
         <div className="text-center py-20">
+          <span className="section-label">empty</span>
           <p className="text-lg text-[rgb(var(--color-text-secondary))]">
             没有找到相关文章
           </p>
+          {query && (
+            <p className="mt-2 text-sm text-[rgb(var(--color-text-tertiary))]">
+              试试其他关键词？
+            </p>
+          )}
         </div>
       ) : (
-        <div className="mx-auto max-w-3xl grid gap-6">
+        <div className="mx-auto max-w-2xl grid gap-4">
           {filtered.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
