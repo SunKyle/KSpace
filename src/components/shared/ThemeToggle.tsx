@@ -23,13 +23,13 @@ export function ThemeToggle() {
   }
 
   if (!mounted) {
-    return <div className="h-9 w-9" />;
+    return <div className="touch-target" />;
   }
 
   return (
     <button
       onClick={toggle}
-      className="flex h-9 w-9 items-center justify-center rounded-lg border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] transition-all hover:border-[rgb(var(--color-accent))] hover:text-[rgb(var(--color-accent))]"
+      className="touch-target rounded-lg border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] transition-all hover:border-[rgb(var(--color-accent))] hover:text-[rgb(var(--color-accent))] cursor-pointer"
       aria-label={dark ? "切换到亮色模式" : "切换到暗色模式"}
     >
       {dark ? <Sun size={18} /> : <Moon size={18} />}

@@ -29,7 +29,7 @@ export function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-[rgb(var(--color-text-tertiary))] transition-all hover:text-[rgb(var(--color-accent))] hover:bg-[rgb(var(--color-bg-tertiary))]"
+                className="touch-target rounded-lg text-[rgb(var(--color-text-tertiary))] transition-all hover:text-[rgb(var(--color-accent))] hover:bg-[rgb(var(--color-bg-tertiary))] cursor-pointer"
                 aria-label={social.label}
               >
                 <social.icon size={16} />

@@ -57,7 +57,7 @@ export function Header() {
           <ThemeToggle />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))]"
+            className="touch-target rounded-lg border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] cursor-pointer"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={16} /> : <Menu size={16} />}
