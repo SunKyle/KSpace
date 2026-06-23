@@ -167,25 +167,35 @@ function Band({
   };
 
   const { nodes, materials } = useGLTF("/assets/lanyard/card.glb");
-  const texture = useTexture(lanyardImage || "/assets/lanyard/lanyard.png");
+  // Use BLANK_PIXEL as default — a guaranteed-valid data URL avoids WebGL texture errors
+  const texture = useTexture(lanyardImage || BLANK_PIXEL);
   const frontTex = useTexture(frontImage || BLANK_PIXEL);
   const backTex = useTexture(backImage || BLANK_PIXEL);
 
   const cardMap = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const baseMap = (materials as any).base.map;
-    if (!frontImage && !backImage) return baseMap;
+    const baseMat = (materials as any).base;
+    const baseMap = baseMat?.map;
 
-    const baseImg = baseMap.image;
-    const W = baseImg.width;
-    const H = baseImg.height;
+    // If no custom images, use the material as-is (no texture override)
+    if (!frontImage && !backImage) return baseMap ?? null;
+
+    // If base material has no texture map, create a blank canvas
+    const W = baseMap?.image?.width || 512;
+    const H = baseMap?.image?.height || 512;
     const canvas = document.createElement("canvas");
     canvas.width = W;
     canvas.height = H;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return baseMap;
+    if (!ctx) return baseMap ?? null;
 
-    ctx.drawImage(baseImg, 0, 0, W, H);
+    // Copy base texture if exists
+    if (baseMap?.image) {
+      ctx.drawImage(baseMap.image, 0, 0, W, H);
+    } else {
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, W, H);
+    }
 
     const drawFitted = (img: HTMLImageElement, rect: typeof FRONT_UV_RECT) => {
       const rx = rect.x * W;
@@ -217,7 +227,7 @@ function Band({
 
     const composite = new THREE.CanvasTexture(canvas);
     composite.colorSpace = THREE.SRGBColorSpace;
-    composite.flipY = baseMap.flipY;
+    if (baseMap) composite.flipY = baseMap.flipY;
     composite.anisotropy = 16;
     composite.needsUpdate = true;
     return composite;
