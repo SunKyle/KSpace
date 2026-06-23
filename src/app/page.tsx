@@ -10,7 +10,7 @@ import {
   BrainCircuit,
   ChevronRight,
 } from "lucide-react";
-import { HeroGeometric } from "@/components/ui/shape-landing-hero";
+import { LanyardHero } from "@/components/home/LanyardHero";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { posts, projects } from "@/lib/velite";
 import { formatDate, readingTime } from "@/lib/utils";
@@ -65,14 +65,9 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════════════════════════
-          SECTION 1 — Hero (Geometric)
+          SECTION 1 — Hero (3D Lanyard)
           ═══════════════════════════════════════════ */}
-      <HeroGeometric
-        badge="KSpace"
-        title1="构建 · 思考 · 分享"
-        title2="技术品牌 & AI 实验空间"
-        description="在 Web 与 AI 的交汇处构建产品，探索技术的边界。"
-      />
+      <LanyardHero />
 
       {/* ═══════════════════════════════════════════
           SECTION 2 — About Blurb
