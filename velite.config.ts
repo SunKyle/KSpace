@@ -33,6 +33,35 @@ const posts = defineCollection({
     })),
 });
 
+const projects = defineCollection({
+  name: "Project",
+  pattern: "projects/**/*.mdx",
+  schema: s
+    .object({
+      title: s.string().max(100),
+      slug: s.string().optional(),
+      description: s.string().max(300),
+      tags: s.array(s.string()).default([]),
+      links: s
+        .object({
+          github: s.string().optional(),
+          demo: s.string().optional(),
+          docs: s.string().optional(),
+        })
+        .default({}),
+      status: s.enum(["active", "completed", "archived"]).default("completed"),
+      featured: s.boolean().default(false),
+      date: s.isodate(),
+      cover: s.string().optional(),
+      code: s.markdown(),
+    })
+    .transform((data, { meta }) => ({
+      ...data,
+      slug: data.slug || slugify(data.title),
+      path: `/projects/${data.slug || slugify(data.title)}`,
+    })),
+});
+
 export default defineConfig({
   root: "src/content",
   output: {
@@ -41,7 +70,7 @@ export default defineConfig({
     base: "/static/",
     clean: true,
   },
-  collections: { posts },
+  collections: { posts, projects },
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

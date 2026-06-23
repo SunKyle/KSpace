@@ -1,1 +1,1 @@
-export { posts } from "../../.velite";
+export { posts, projects } from "../../.velite";

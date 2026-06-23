@@ -1,0 +1,47 @@
+---
+title: "KSpace"
+description: "个人技术品牌站——博客、项目展示、AI 实验室三位一体"
+tags: ["Next.js", "TypeScript", "Tailwind CSS", "Velite", "Framer Motion"]
+links:
+  github: "https://github.com/kyle-sun/kspace"
+  demo: "https://kspace.dev"
+status: "active"
+featured: true
+date: "2026-06-22"
+---
+
+## 项目概述
+
+KSpace 是我的个人技术品牌网站，集成了技术博客、项目展示和 AI 实验室三大模块。从零构建，追求极致性能和独特视觉。
+
+## 技术架构
+
+### 前端
+- **Next.js 15** App Router 作为核心框架
+- **TypeScript** strict 模式保证代码质量
+- **Tailwind CSS** + CSS 变量实现亮暗主题
+- **Framer Motion** 驱动动画（PixelTrail, ScrollReveal）
+
+### 内容层
+- **Velite** 处理 MDX 内容，构建时生成类型安全的数据
+- **Shiki / highlight.js** 提供代码语法高亮
+- **Giscus** 作为评论系统，无需后端数据库
+
+### 部署
+- **Vercel** 自动部署，自定义域名
+- **ISR** 按需增量再生成
+- RSS 和 Sitemap 自动生成
+
+## 关键特性
+
+1. **Gooey PixelTrail** — 首页交互式像素拖尾动画
+2. **MDX 博客** — Git 管理文章，VS Code 写作
+3. **暗色模式** — CSS 变量驱动的主题切换
+4. **项目展示** — 深度案例页面
+5. **类型安全** — Velite 自动生成 TypeScript 类型
+
+## 性能指标
+
+- Lighthouse 评分 95+
+- FCP < 1.2s
+- 全站 SSG + ISR
