@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 
 const Lanyard = dynamic(() => import("@/components/ui/Lanyard"), {
@@ -12,10 +14,22 @@ const Lanyard = dynamic(() => import("@/components/ui/Lanyard"), {
 });
 
 export function LanyardHero() {
+  const pathname = usePathname();
+
+  // Force Lanyard Canvas remount on each client-side navigation back to /
+  // R3F Canvas keeps its WebGL context; without a new key the old (stale) context
+  // gets reused and renders nothing.
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- pathname triggers remount
+  const canvasKey = useMemo(() => `lanyard-${Date.now()}`, [pathname]);
+
   return (
     <section className="relative w-full h-screen bg-[#030303] flex flex-col items-center justify-center overflow-hidden">
-      {/* Lanyard 3D canvas */}
-      <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+      {/* Lanyard 3D canvas — keyed to force remount on navigation */}
+      <Lanyard
+        key={canvasKey}
+        position={[0, 0, 20]}
+        gravity={[0, -40, 0]}
+      />
 
       {/* Overlay text */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
