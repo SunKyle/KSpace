@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { StructuredData } from "@/components/shared/StructuredData";
 import "@/styles/globals.css";
 
 const fontSans = Inter({
@@ -19,6 +20,7 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kspace.dev"),
   title: {
     default: "KSpace — 思考 · 构建 · 分享",
     template: "%s | KSpace",
@@ -27,6 +29,11 @@ export const metadata: Metadata = {
     "一个全栈开发者的个人技术站点。探索技术博客、开源项目与 AI 实验。",
   keywords: ["全栈", "前端", "React", "Next.js", "AI", "LLM", "技术博客"],
   authors: [{ name: "Kyle", url: "https://kspace.dev" }],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     locale: "zh_CN",
@@ -55,6 +62,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        {/* Structured Data for SEO */}
+        <StructuredData />
+      </head>
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] min-h-screen flex flex-col`}
       >

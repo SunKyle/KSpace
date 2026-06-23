@@ -1,0 +1,16 @@
+{
+  "name": "KSpace",
+  "short_name": "KSpace",
+  "description": "一个全栈开发者的个人技术空间——思考、构建、分享。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090B",
+  "theme_color": "#4F46E5",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
