@@ -10,7 +10,6 @@ import {
   BrainCircuit,
   ChevronRight,
 } from "lucide-react";
-import { LanyardHero } from "@/components/home/LanyardHero";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { posts, projects } from "@/lib/velite";
 import { formatDate, readingTime } from "@/lib/utils";
@@ -65,12 +64,7 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════════════════════════
-          SECTION 1 — Hero (3D Lanyard)
-          ═══════════════════════════════════════════ */}
-      <LanyardHero />
-
-      {/* ═══════════════════════════════════════════
-          SECTION 2 — About Blurb
+          SECTION 1 — About Blurb
           ═══════════════════════════════════════════ */}
       <section className="container-page py-20 sm:py-28">
         <ScrollReveal>
