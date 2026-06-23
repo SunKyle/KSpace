@@ -27,8 +27,13 @@ export function LanyardHero() {
       {/* Lanyard 3D canvas — keyed to force remount on navigation */}
       <Lanyard
         key={canvasKey}
-        position={[0, 0, 20]}
+        position={[0, 0, 22]}
         gravity={[0, -40, 0]}
+        frontImage="/assets/lanyard/card-front.png"
+        backImage="/assets/lanyard/card-back.png"
+        imageFit="cover"
+        lanyardImage="/assets/lanyard/lanyard-band.png"
+        lanyardWidth={1.5}
       />
 
       {/* Overlay text */}
