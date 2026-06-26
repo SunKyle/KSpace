@@ -13,6 +13,7 @@ import {
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { posts, projects } from "@/lib/velite";
 import { formatDate, readingTime } from "@/lib/utils";
+import { SplineHero } from "@/components/home/SplineHero";
 
 // ---- Data ---- //
 const featuredProjects = projects
@@ -64,7 +65,12 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════════════════════════
-          SECTION 1 — About Blurb
+          SECTION 1 — Hero (Spline 3D Scene)
+          ═══════════════════════════════════════════ */}
+      <SplineHero />
+
+      {/* ═══════════════════════════════════════════
+          SECTION 2 — About Blurb
           ═══════════════════════════════════════════ */}
       <section className="container-page py-20 sm:py-28">
         <ScrollReveal>

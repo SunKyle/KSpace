@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Terminal } from "lucide-react";
@@ -17,10 +17,30 @@ const NAV_ITEMS = [
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const pathname = usePathname();
 
+  // ── Track scroll position — transparent header when at top (over hero) ──
+  useEffect(() => {
+    const onScroll = () => setIsAtTop(window.scrollY < 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Only apply hero transparency on the home page
+  const isHome = pathname === "/";
+  const heroTransparent = isHome && isAtTop;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))]/70 backdrop-blur-xl saturate-150">
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-500",
+        heroTransparent
+          ? "border-b border-transparent bg-transparent backdrop-blur-none"
+          : "border-b border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))]/70 backdrop-blur-xl saturate-150"
+      )}
+    >
       <div className="container-wide flex h-14 items-center justify-between">
         {/* Logo */}
         <Link
@@ -38,16 +58,31 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-lg px-3 py-1.5 text-[13px] font-medium transition-colors",
-                pathname === item.href
-                  ? "text-[rgb(var(--color-accent))] bg-[rgb(var(--color-accent))]/8"
-                  : "text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-tertiary))]"
+                "rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all duration-500",
+                heroTransparent
+                  ? cn(
+                      pathname === item.href
+                        ? "text-white bg-white/10"
+                        : "text-white/60 hover:text-white hover:bg-white/10"
+                    )
+                  : cn(
+                      pathname === item.href
+                        ? "text-[rgb(var(--color-accent))] bg-[rgb(var(--color-accent))]/8"
+                        : "text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-tertiary))]"
+                    )
               )}
             >
               {item.label}
             </Link>
           ))}
-          <div className="ml-2 pl-2 border-l border-[rgb(var(--color-border))]">
+          <div
+            className={cn(
+              "ml-2 pl-2 transition-all duration-500",
+              heroTransparent
+                ? "border-l border-white/15"
+                : "border-l border-[rgb(var(--color-border))]"
+            )}
+          >
             <ThemeToggle />
           </div>
         </nav>
@@ -57,7 +92,12 @@ export function Header() {
           <ThemeToggle />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="touch-target rounded-lg border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] cursor-pointer"
+            className={cn(
+              "touch-target rounded-lg border cursor-pointer transition-all duration-500",
+              heroTransparent
+                ? "border-white/20 text-white/60"
+                : "border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))]"
+            )}
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={16} /> : <Menu size={16} />}
