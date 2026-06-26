@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Inter } from "next/font/google";
+import { JetBrains_Mono, Space_Grotesk, Archivo } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StructuredData } from "@/components/shared/StructuredData";
 import "@/styles/globals.css";
 
-const fontSans = Inter({
+const fontSans = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+  preload: false,
+});
+
+const fontDisplay = Archivo({
+  subsets: ["latin"],
+  variable: "--font-display",
   display: "swap",
   preload: false,
 });
@@ -67,7 +74,7 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] min-h-screen flex flex-col`}
+        className={`${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable} font-sans bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] min-h-screen flex flex-col`}
       >
         {/* Prevent FOUC */}
         <script

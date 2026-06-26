@@ -335,12 +335,12 @@ export function SplineHero() {
       >
         <div className="max-w-2xl">
           {/* ── L1: Terminal prompt ── */}
-          <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-indigo-300/35 mb-4 sm:mb-5">
+          <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-indigo-300/55 mb-4 sm:mb-5">
             &gt; kyle@kspace:~$ <span className="inline-block w-[1ch] bg-indigo-300/40 animate-pulse" />
           </p>
 
           {/* ── L2: Headline ── */}
-          <h1 className="text-[clamp(2.5rem,7vw,6.5rem)] font-bold tracking-[-0.03em] text-white leading-[0.92]">
+          <h1 className="font-display text-[clamp(2.5rem,7vw,6.5rem)] font-bold tracking-[-0.03em] text-white leading-[0.92]">
             构建<span className="text-indigo-400">.</span>
             思考<span className="text-indigo-400">.</span>
             分享
@@ -352,7 +352,7 @@ export function SplineHero() {
           </p>
 
           {/* ── L4: Description ── */}
-          <p className="mt-3 sm:mt-4 text-[13px] sm:text-sm text-white/25 font-normal leading-relaxed max-w-[360px]">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-white/55 font-normal leading-relaxed max-w-[360px]">
             在 Web 工程与智能系统的交汇处构建
           </p>
 
@@ -361,7 +361,7 @@ export function SplineHero() {
             <Link
               href="/projects"
               className="inline-flex items-center gap-2 rounded-xl bg-white/90 px-5 py-2.5
-                         text-[13px] font-semibold text-[#0a0a14]
+                         text-sm font-semibold text-[#0a0a14]
                          transition-all duration-300
                          hover:bg-white hover:shadow-[0_0_32px_rgb(99_102_241/0.25)]
                          active:scale-[0.97]"
@@ -385,10 +385,10 @@ export function SplineHero() {
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10
-                         px-5 py-2.5 text-[13px] font-medium text-white/40
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20
+                         px-5 py-2.5 text-sm font-medium text-white/55
                          transition-all duration-300
-                         hover:border-white/25 hover:text-white/70 hover:bg-white/[0.04]
+                         hover:border-white/35 hover:text-white/85 hover:bg-white/[0.06]
                          active:scale-[0.97]"
             >
               关于我
