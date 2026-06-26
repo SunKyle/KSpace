@@ -2,8 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export function ThemeToggle() {
+interface ThemeToggleProps {
+  /** Use light-tinted styling — for when the toggle sits on a dark background */
+  variant?: "default" | "overlay";
+}
+
+export function ThemeToggle({ variant = "default" }: ThemeToggleProps) {
   const [dark, setDark] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -26,10 +32,17 @@ export function ThemeToggle() {
     return <div className="touch-target" />;
   }
 
+  const isOverlay = variant === "overlay";
+
   return (
     <button
       onClick={toggle}
-      className="touch-target rounded-lg border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] transition-all hover:border-[rgb(var(--color-accent))] hover:text-[rgb(var(--color-accent))] cursor-pointer"
+      className={cn(
+        "touch-target rounded-lg border transition-all cursor-pointer",
+        isOverlay
+          ? "border-white/15 text-white/50 hover:border-white/30 hover:text-white"
+          : "border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:border-[rgb(var(--color-accent))] hover:text-[rgb(var(--color-accent))]"
+      )}
       aria-label={dark ? "切换到亮色模式" : "切换到暗色模式"}
     >
       {dark ? <Sun size={18} /> : <Moon size={18} />}

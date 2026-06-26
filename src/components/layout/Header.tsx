@@ -37,8 +37,8 @@ export function Header() {
       className={cn(
         "sticky top-0 z-50 transition-all duration-500",
         heroTransparent
-          ? "border-b border-transparent bg-transparent backdrop-blur-none"
-          : "border-b border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))]/70 backdrop-blur-xl saturate-150"
+          ? "border-b border-transparent bg-transparent backdrop-blur-none opacity-0 -translate-y-full pointer-events-none"
+          : "border-b border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))]/70 backdrop-blur-xl saturate-150 opacity-100 translate-y-0"
       )}
     >
       <div className="container-wide flex h-14 items-center justify-between">
@@ -83,13 +83,13 @@ export function Header() {
                 : "border-l border-[rgb(var(--color-border))]"
             )}
           >
-            <ThemeToggle />
+            <ThemeToggle variant={heroTransparent ? "overlay" : "default"} />
           </div>
         </nav>
 
         {/* Mobile Toggle */}
         <div className="flex items-center gap-1 md:hidden">
-          <ThemeToggle />
+          <ThemeToggle variant={heroTransparent ? "overlay" : "default"} />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className={cn(
